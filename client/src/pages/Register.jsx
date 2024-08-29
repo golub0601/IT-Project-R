@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import "../style/style.scss"
 import "../style/login_register.scss"
@@ -11,6 +11,10 @@ const Register = () => {
     password : ''
   })
 
+  const navigate = useNavigate();
+
+  const [err, setError] = useState(null)
+
   const handleChange = e => {
     setInputs(prev=>({...prev, [e.target.name]:e.target.value}))
   }
@@ -18,11 +22,11 @@ const Register = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try{
-      const res = await axios.post('http://localhost:8800/api/auth/register', inputs)
-      console.log(res)
+      await axios.post('http://localhost:8800/api/auth/register', inputs)
+      navigate("/login");
     }
     catch(e) {
-      console.log(e);
+      setError(e.response.data)
       console.log('Error in register.jsx')
     }
     
@@ -36,7 +40,7 @@ const Register = () => {
             <input type="text" required name="name" placeholder="name" onChange={handleChange} />
             <input type="password" required name="password" placeholder="password" id="" onChange={handleChange} />
             <button onClick={handleSubmit} >REGISTER</button>
-            <p>THIS IS AN ERROR PARAGRAPH!</p>  {/* hidden */}
+            {err && <p>{err}</p>  }
             <span>Already have an account? <Link to='/login'>Login</Link></span>
         </form>
     </div>
