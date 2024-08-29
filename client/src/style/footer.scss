@@ -1,0 +1,20 @@
+@import 'colors.scss';
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 200px;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 60px;
+    background-color: $blue;
+    .logo{
+        width: 100px
+    }
+    .slogan{
+        font-weight: 500;
+        color: darken($color: $deepTeal, $amount: 20%);
+        font-size: 16px;
+    }
+}

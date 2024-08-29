@@ -1,0 +1,81 @@
+@import 'colors.scss';
+
+.singlePost{
+    display: flex;
+    padding: 20px;
+    .content{
+        flex: 5;
+        margin-right: 10px;
+        img{
+            max-width: 100%;
+            max-height: 700px;
+            object-fit: cover;
+        }
+        .info{
+            padding: 10px;
+            width:420px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            .user-img{
+                img{
+                    width: 100px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+            .text-info{
+                padding-right: 10px;
+                max-width: 200px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                span{
+                    color: darken($deepTeal, 20%);
+                    font-weight: 600;
+                    a{
+                        text-decoration: none;
+                    }
+                }
+            }
+            .edit-links{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .edit{
+                    background: green;
+                    border: none;
+                    width: 120px;
+                    padding: 5px;
+                    &:hover{
+                        background-color: darken(green,10%);
+                    }
+                    
+                }
+                .delete{
+                    background-color: rgb(209, 29, 29);
+                    border: none;
+                    width: 120px;
+                    padding: 5px;
+                    &:hover{
+                        background-color: darken(rgb(209, 29, 29),10%);
+                    }
+                }
+            }
+        }
+        .post-text{
+            margin-top: 50px;
+            color:darken($deepTeal, 20%);
+            font-size: 18px;
+            h1{
+                font-size: 42px;
+                color: darken($deepTeal, 30%);
+            }
+        }
+
+    }
+    .menu{
+        flex: 2;
+    }
+
+}

@@ -1,0 +1,101 @@
+@import 'colors.scss';
+
+.write-page-container{
+    display: flex;
+    margin-top: 30px;
+    .content{
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        input{
+            padding: 10px 10px;
+            width: 700px;
+            border: 2px solid darken($deepTeal, 10%);
+            border-radius: 5px;
+            font-weight:600;
+            background-color: inherit;
+            &:focus{
+                border: 2px solid darken($softCoral, 0%); 
+            }
+        }
+        .editorContainer{
+            height: 300px;
+            font-weight:600;
+            overflow: hidden;
+            margin: 20px;
+            width: 720px;
+            border-bottom: none;
+            display: flex;
+            justify-content: center;
+            .richEditor{
+                border-radius: 5px;
+                height: 90%;
+                overflow-y: scroll;
+                width: 100%;
+                border: 2px solid darken($deepTeal, 10%);
+                color: black;
+                .ql-picker-label{
+                    font-family: 'Courier New', Courier, monospace;
+                    font-weight: 600;
+                    color: gray;
+                }
+                
+                .ql-editor{
+                    color: inherit;
+                    font-family: 'Courier New', Courier, monospace;
+                    font-size: 14px;
+                }
+            }
+            
+        }
+
+    }
+    .menu{
+        flex: 1;
+        h4{
+            margin-top: 0px;
+        }
+        .catGroup{
+            margin-bottom: 40px;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: start;
+            justify-content: center;
+            .catG{
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                justify-content: center;
+            }
+
+        }
+        button{
+            margin: 0px;
+            padding: 5px 10px;
+            width: 100%;
+        }
+        .upload-btn {
+            background-color: $deepTeal;
+            color: #fff;
+            cursor: pointer;
+            border: 2px solid darken($deepTeal, 10%);
+            border-radius: 5px;
+            font-size: 14px;
+            display: flex;
+            margin: 0;
+            padding: 5px 10px;
+            width: 90%;
+            background-color: darken(lightgreen, 30%);
+            justify-content: center;
+            &:hover {
+                background-color: darken(lightgreen, 40%);
+            }
+        }
+
+    }
+}
