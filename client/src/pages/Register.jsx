@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import "../style/style.scss"
+import "../style/login_register.scss"
 
 const Register = () => {
   const [inputs, setInputs] = useState ({

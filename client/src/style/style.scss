@@ -44,62 +44,10 @@ a{
     .container{
         margin: auto;
         width: 1024px;
-        //LOGIN AND REGISTER PAGES
-        .auth{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: $lightGreen;
-            
-
-            h1{
-                font-size: 40px;
-                color: teal;
-            }
-
-            form{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 50px;
-                background-color: aliceblue;
-                width: 220px;
-                gap: 20px;
-
-                input{
-                    padding: 10px;
-                    border: none;
-                    border-bottom: 1px solid grey;
-                }
-
-                button{
-                    width: 220px;
-                    padding: 10px;
-                    background-color: teal;
-                    color: aliceblue;
-                    cursor: pointer;
-                    border: none;
-                }
-
-                p{
-                    padding: 0;
-                    color: red;
-                    text-align: center;
-                    font-size: 14px;
-                    visibility: hidden;
-                }
-
-                span{
-                    font-size: 14px;
-                    text-align: center;
-
-                }
-            }
-        }
         
+            }
     }
-}
+        
+    
+
 
