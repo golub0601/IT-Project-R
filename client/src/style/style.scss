@@ -14,7 +14,6 @@ input, textarea, select{
     font-family: 'Courier New', Courier, monospace;
 }
 
-
 header {
     background-color: $lightGreen;
 }
@@ -30,24 +29,52 @@ button {
     &:hover {
         background-color: darken($deepTeal, 10%);
     }
-    
 }
 
-a{
+a {
     color: darken($deepTeal, 20%);
     &:hover {
         color: cadetblue;
     }
 }
 
-.app{
-    .container{
+.app {
+    .container {
         margin: auto;
+        max-width: 90%; // Adjust the width to be a percentage of the viewport
         width: 1024px;
-        
-            }
+
+        // Responsive layout adjustments for smaller screens
+        @media (max-width: 768px) {
+            width: 90%; // Adjust the container width to be 90% for smaller screens
+        }
+
+        @media (max-width: 480px) {
+            width: 100%; // On small devices, take up full width
+            padding: 10px; // Add some padding for small screens
+        }
     }
-        
-    
+}
 
+// Media query for general responsive breakpoints
+@media (max-width: 1024px) {
+    body {
+        font-size: 16px; // Adjust the font size for tablets
+    }
+}
 
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; // Adjust the font size for smaller screens like tablets
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px; // Make text smaller for mobile devices
+    }
+
+    button {
+        font-size: 12px; // Adjust button text size for small screens
+    }
+}

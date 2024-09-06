@@ -21,7 +21,7 @@ export const getAllPosts = async (req, res) => {
 
             if (category_id) {
                 query += " WHERE category_id = @Cat_id";
-                query += " ORDER BY date DESC";
+                query += " ORDER BY id DESC";
                 result = await db.request()
                 .input("Cat_id", sql.Int, category_id)
                 .query(query);
@@ -29,7 +29,7 @@ export const getAllPosts = async (req, res) => {
         
         }
         else{
-            query += " ORDER BY date DESC";
+            query += " ORDER BY id DESC";
             result = await db.request()
             .query(query);
             }
@@ -121,7 +121,7 @@ export const addPost = (req, res) => {
                 .input("Body", sql.VarChar,values[1])    
                 .input("Cover_img", sql.VarChar,values[2])
                 .input("Category_id", sql.Int,values[3])
-                .input("Date",sql.Date, values[4])
+                .input("Date",sql.DateTime, values[4])
                 .input("User_id", sql.Int, values[5])
                 .query(q);
         
