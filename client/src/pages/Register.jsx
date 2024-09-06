@@ -8,6 +8,7 @@ const Register = () => {
   const [inputs, setInputs] = useState ({
     name : '',
     email : '',
+    surname: '',
     password : ''
   })
 
@@ -38,6 +39,7 @@ const Register = () => {
         <form action="">
             <input type="email" required name="email" placeholder="email" onChange={handleChange}/>
             <input type="text" required name="name" placeholder="name" onChange={handleChange} />
+            <input type="text" required name="surname" placeholder="surname" onChange={handleChange} />
             <input type="password" required name="password" placeholder="password" id="" onChange={handleChange} />
             <button onClick={handleSubmit} >REGISTER</button>
             {err && <p>{err}</p>  }

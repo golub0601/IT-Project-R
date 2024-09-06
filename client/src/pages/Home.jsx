@@ -1,53 +1,26 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import {Link, useLocation} from 'react-router-dom'
+import axios from 'axios'
 import "../style/style.scss"
 import "../style/home-style.scss"
 
 const Home = () => {
-    const posts = [
-      {
-        id: 1,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      },
-      {
-        id: 2,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      },
-      {
-        id: 3,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      },
-      {
-        id: 4,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      },
-      {
-        id: 5,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      },
-      {
-        id: 6,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-      },
-      {
-        id: 7,
-        title : "Amet consectetur adiam repelsa",
-        desc : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, saepe?",
-        img: 'https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  const [posts, setPosts] = useState([])
+
+  const cat = useLocation().search;
+
+  useEffect(()=>{
+    const fetchPosts = async () =>{
+      try {
+        const res = await axios.get(`http://localhost:8800/api/posts${cat}`);
+        setPosts(res.data);
+      } catch (error) {
+        console.log(error);
       }
-    ]
+    }
+    fetchPosts();
+  },[cat])
+
   return (
 
     <div className='home'>
@@ -55,14 +28,14 @@ const Home = () => {
         {posts.map((post)=>(
           <div className='post' key={post.id}>
             <div className='post-img'>
-              <img src={post.img} alt="" />
+              <img src={`../uploads/${post.cover_img}`} alt="" />
               <div className='bg-img'></div>
             </div>
             <div className='content'>
               <Link to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <p>{post.desc}</p>
+              <div dangerouslySetInnerHTML={{ __html: post?.body }} /> {/* Safely render HTML */}
               <Link to={`post/${post.id}`}>
                 <button>Read more</button>
               </Link>

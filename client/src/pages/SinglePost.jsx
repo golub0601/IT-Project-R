@@ -1,46 +1,80 @@
-import React from 'react'
-import User from '../imgs/user.jpg'
-import {Link} from 'react-router-dom'
-import "../style/style.scss"
-import "../style/single-post.scss"
-import Menu from '../components/Menu'
+import React, { useContext, useEffect, useState } from 'react';
+import User from '../imgs/user.jpg';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
+import { AuthContext } from '../context/authContext';
+import Menu from '../components/Menu';
+import LoadingSpinner from '../components/LoadingSpinner.jsx';
+
+import "../style/style.scss";
+import "../style/single-post.scss";
+
 
 const SinglePost = () => {
+  const [post, setPost] = useState(null);  // Initialize as null for the post
+  const [recommendedPosts, setRecommendedPosts] = useState([]);  // Initialize an empty array for recommended posts
+
+  const location = useLocation();
+  const postId = location.pathname.split('/')[2];  // Get post ID from the URL
+  const { currUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchPostAndRecommended = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/api/posts/${postId}/with-recommendations`);
+        setPost(res.data.post);  // Set the single post data
+        setRecommendedPosts(res.data.recommendedPosts);  // Set the recommended posts
+      } catch (error) {
+        console.error('Error fetching post and recommended posts:', error);
+      }
+    }
+    fetchPostAndRecommended();
+  }, [postId]);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8800/api/posts/${postId}`);
+      navigate('/');
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  }
+
+  // If the post data hasn't loaded yet, show the loading spinner
+  if (!post) {
+    return <LoadingSpinner />
+  }
+
   return (
     <div className='singlePost'>
       <div className='content'>
-        <img src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+      <img src={`../uploads/${post.cover_img}`} alt="" />
         <div className='info'>
-            <div className="user-img">
-              <img src={User} alt="" />
-            </div>
-            <div className='text-info'>
-              <span><Link>John Doe</Link></span>
-              <div className='post-info'>Posted 2 days ago</div>
-            </div>
+          <div className='text-info'>
+            <span><Link to="#">{post?.name} {post?.surname}</Link></span>
+            <div className='post-info'>{post.date ? moment(post?.date).fromNow() : 'Once upon a time'}</div>
+          </div>
+          {(currUser?.id === post?.user_id || currUser?.id==8) && (
             <div className="edit-links">
-              <Link to="/write?edit=2"><button className='edit'>Edit Post</button></Link>
-              <Link><button className='delete'>Delete Post</button></Link>
+              <Link to={`/write?edit=${postId}`} state={post}>
+                <button className='edit'>Edit Post</button>
+              </Link>
+              <button onClick={handleDelete} className='delete'>Delete Post</button>
             </div>
+          )}
         </div>
         <div className="post-text">
-          <h1>Lorem ipsum dolor sit amet consectetur</h1>
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eos, eveniet beatae itaque repellendus expedita repellat incidunt ut rem, deserunt atque quod nemo, eligendi quas. Vitae impedit, provident, sint quibusdam tenetur laborum at enim sapiente maxime, dolorum aliquam voluptatibus alias! Excepturi porro nulla at doloribus fuga vero minima repellat accusantium nostrum ipsa eos nam itaque, temporibus dolorem cum optio possimus iure placeat. Commodi beatae alias consequatur illo nihil saepe nemo eius. Magnam dolorem autem maiores impedit corporis doloribus illum quae beatae accusantium aspernatur hic voluptas iure deleniti nihil, suscipit aliquam, repudiandae laudantium ratione culpa odio iusto officia praesentium. Magni vel, sunt animi similique suscipit quam cumque quo quisquam harum nisi possimus odit accusantium nihil non quaerat expedita rerum? Aut, similique.
-          </p>
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eos, eveniet beatae itaque repellendus expedita repellat incidunt ut rem, deserunt atque quod nemo, eligendi quas. Vitae impedit, provident, sint quibusdam tenetur laborum at enim sapiente maxime, dolorum aliquam voluptatibus alias! Excepturi porro nulla at doloribus fuga vero minima repellat accusantium nostrum ipsa eos nam itaque, temporibus dolorem cum optio possimus iure placeat. Commodi beatae alias consequatur illo nihil saepe nemo eius. Magnam dolorem autem maiores impedit corporis doloribus illum quae beatae accusantium aspernatur hic voluptas iure deleniti nihil, suscipit aliquam, repudiandae laudantium ratione culpa odio iusto officia praesentium. Magni vel, sunt animi similique suscipit quam cumque quo quisquam harum nisi possimus odit accusantium nihil non quaerat expedita rerum? Aut, similique.
-          </p>
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto eos, eveniet beatae itaque repellendus expedita repellat incidunt ut rem, deserunt atque quod nemo, eligendi quas. Vitae impedit, provident, sint quibusdam tenetur laborum at enim sapiente maxime, dolorum aliquam voluptatibus alias! Excepturi porro nulla at doloribus fuga vero minima repellat accusantium nostrum ipsa eos nam itaque, temporibus dolorem cum optio possimus iure placeat. Commodi beatae alias consequatur illo nihil saepe nemo eius. Magnam dolorem autem maiores impedit corporis doloribus illum quae beatae accusantium aspernatur hic voluptas iure deleniti nihil, suscipit aliquam, repudiandae laudantium ratione culpa odio iusto officia praesentium. Magni vel, sunt animi similique suscipit quam cumque quo quisquam harum nisi possimus odit accusantium nihil non quaerat expedita rerum? Aut, similique.
-          </p>
+          <h1>{post?.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: post?.body }} /> {/* Safely render HTML */}
         </div>
       </div>
       <div className="menu">
-        <Menu/>
+        <Menu posts={recommendedPosts} />
       </div>
     </div>
-  )
+  );
 }
 
-export default SinglePost
+export default SinglePost;
