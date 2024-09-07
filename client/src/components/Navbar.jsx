@@ -1,27 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react';
 import Logo from "../imgs/logo.png";
-import {Link} from 'react-router-dom'
-import Home from "../pages/Home.jsx"
-import "../style/style.scss"
-import "../style/navbar.scss"
+import { Link } from 'react-router-dom';
+import "../style/style.scss";
+import "../style/navbar.scss";
 import { AuthContext } from '../context/authContext.jsx';
 
-
 const Navbar = () => {
+  const { currUser, logout } = useContext(AuthContext);
+  const [menuOpen, setMenuOpen] = useState(false);  // State to handle the hamburger menu
 
-
-  const {currUser, logout} = useContext(AuthContext);
-  
-  
   return (
     <div className='navbar'>
       <div className="container">
-        <div className="logo"> <Link to ='/'><img src={Logo} alt="logo, link to home" /></Link></div>
-        <div className='links'>
+        <div className="logo">
+          <Link to='/'>
+            <img src={Logo} alt="logo, link to home" />
+          </Link>
+        </div>
+
+        <div className={`links ${menuOpen ? 'show' : ''}`}>
           <Link className='link-nav' to="/?cat=loots">LOOTS</Link>
           <Link className='link-nav' to="/?cat=houses">HOUSES</Link>
           <Link className='link-nav' to="/?cat=appartments">APPARTMENTS</Link>
-          <p>|</p>
+          <p className='separator-line'>|</p>
+          <span className="separator-h-line"></span>
           {currUser ? (
             <>
               <span>{currUser.name.toUpperCase()} {currUser.surname?.toUpperCase()}</span>
@@ -35,9 +37,16 @@ const Navbar = () => {
             </>
           )}
         </div>
+
+        {/* Hamburger menu icon for mobile */}
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className="line"></span>
+          <span className="line"></span>
+          <span className="line"></span>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
