@@ -37,7 +37,12 @@ const Home = () => {
               <Link to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <div dangerouslySetInnerHTML={{ __html: post?.body }} /> {/* Safely render HTML */}
+              <div dangerouslySetInnerHTML={{
+                      __html: post?.body.length > 40
+                            ? `${post.body.slice(0, 40)}...`
+                            : post.body
+                    }}
+              /> {/* Safely render HTML */}
               <Link to={`post/${post.id}`}>
                 <button>Read more</button>
               </Link>

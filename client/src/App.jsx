@@ -12,6 +12,7 @@ import Write from "./pages/Write";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { useEffect, useState } from "react";
 
 const Layout = () => {
   return (

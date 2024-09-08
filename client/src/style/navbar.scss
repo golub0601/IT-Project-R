@@ -84,8 +84,10 @@
     }
   }
 
+  
+
   // Media query for tablets and smaller screens
-  @media (max-width: 768px) {
+  @media (max-width: 960px) {
     .container {
       justify-content: space-between;
 

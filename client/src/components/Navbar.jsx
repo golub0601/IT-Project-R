@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import Logo from "../imgs/logo.png";
 import { Link } from 'react-router-dom';
 import "../style/style.scss";
@@ -8,7 +8,24 @@ import { AuthContext } from '../context/authContext.jsx';
 const Navbar = () => {
   const { currUser, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);  // State to handle the hamburger menu
+  const hamburgerRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // console.log(menuOpen);
+      if (menuOpen && !hamburgerRef.current.contains(event.target)){
+        console.log("clicked!");
+        setMenuOpen(false); 
+      }
+    };
 
+    // Add event listener for clicks on the whole document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
   return (
     <div className='navbar'>
       <div className="container">
@@ -39,7 +56,7 @@ const Navbar = () => {
         </div>
 
         {/* Hamburger menu icon for mobile */}
-        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)} ref={hamburgerRef}>
           <span className="line"></span>
           <span className="line"></span>
           <span className="line"></span>
