@@ -47,7 +47,7 @@ const Write = () => {
             cover_img: cover_img ? imgUrl : "1725498437041peakpx.jpg",
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           });
-          navigate("/")
+          navigate("/posts/home")
     } catch (err) {
       console.log(err);
     }

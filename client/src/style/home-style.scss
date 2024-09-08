@@ -1,6 +1,8 @@
 @import 'colors.scss';
 
 .home {
+  margin-left: 40px;
+  margin-right: 40px;
   .posts {
     margin-top: 50px;
     display: flex;
@@ -62,12 +64,13 @@
         }
 
         p {
-          font-size: 18px;
+          font-size: 28px;
         }
 
         button {
           width: max-content;
           padding: 10px 20px;
+          font-size: 20px;
         }
       }
     }

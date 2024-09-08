@@ -16,7 +16,7 @@ const SinglePost = () => {
   const [recommendedPosts, setRecommendedPosts] = useState([]);  // Initialize an empty array for recommended posts
 
   const location = useLocation();
-  const postId = location.pathname.split('/')[2];  // Get post ID from the URL
+  const postId = location.pathname.split('/')[3];  // Get post ID from the URL
   const { currUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const SinglePost = () => {
   return (
     <div className='singlePost'>
       <div className='content'>
-      <img src={`../uploads/${post.cover_img}`} alt="" />
+      <img src={`/uploads/${post.cover_img}`} alt="" />
         <div className='info'>
           <div className='text-info'>
             <span><Link to="#">{post?.name} {post?.surname}</Link></span>
@@ -58,7 +58,7 @@ const SinglePost = () => {
           </div>
           {(currUser?.id === post?.user_id || currUser?.id==8) && (
             <div className="edit-links">
-              <Link to={`/write?edit=${postId}`} state={post}>
+              <Link to={`/posts/write?edit=${postId}`} state={post}>
                 <button className='edit'>Edit Post</button>
               </Link>
               <button onClick={handleDelete} className='delete'>Delete Post</button>

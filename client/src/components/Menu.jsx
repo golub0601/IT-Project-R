@@ -19,9 +19,9 @@ function Menu({ posts }) {
       <h1>Other posts that you may like:</h1>
           {posts.map((post)=>(
             <div className='post-view-menu' key={post.id}>
-              <img src={`../uploads/${post.cover_img}`} alt="" />
+              <img src={`/uploads/${post.cover_img}`} alt="" />
               <h2>{post.title}</h2>
-              <Link to={`/post/${post.id}`}>
+              <Link to={`http://localhost:5173/posts/post/${post.id}`}>
                 <button className='read-post-btn'>Read more</button>
               </Link>
             </div>

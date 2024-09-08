@@ -2,33 +2,35 @@
 
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
+  width: 100%;
 
   .container {
     display: flex;
+    margin: auto;
     justify-content: space-between;
     align-items: center;
     width: 100%; // Ensure full width
 
     .logo {
-      margin-left: 10px;
+      // margin-left: 10px;
       display: flex;
       justify-content: center;
 
       img {
-        height: 80px;
+        height: 120px;
       }
     }
 
     .links {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
-      font-size: 16px;
-      font-weight: 300;
-      margin-right: 20px;
+      font-size: 20px;
+      font-weight: 500;
+      // margin-right: 20px;
         .separator-h-line{
             display: none;
             width: 90%;
@@ -43,15 +45,16 @@
 
       span {
         font-weight: 600;
+        font-size: 16px;
         text-decoration: underline;
       }
 
       .write-btn {
         border: none;
         border-radius: 5px;
-        padding: 5px 10px;
-        font-size: 14px;
-        background-color: $deepTeal;
+        padding: 7px 10px;
+        font-size: 16px;
+        background-color: lighten($deepTeal, 10%);
         color: white;
         &:hover {
           background-color: darken($deepTeal, 10%);
@@ -61,7 +64,7 @@
       .logout-btn {
         border: none;
         padding: 5px 15px;
-        font-size: 14px;
+        font-size: 16px;
         background-color: darken($softCoral, 10%);
         &:hover {
           background-color: $softCoral;

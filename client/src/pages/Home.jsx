@@ -27,14 +27,14 @@ const Home = () => {
       <div className="posts">
         {posts.map((post)=>(
           <div className='post' key={post.id}>
-            <Link to={`/post/${post.id}`}>
+            <Link to={`http://localhost:5173/posts/post/${post.id}`}>
               <div className='post-img'>
                 <img src={`../uploads/${post.cover_img}`} alt="" />
                 <div className='bg-img'></div>
               </div>
             </Link>
             <div className='content'>
-              <Link to={`/post/${post.id}`}>
+              <Link to={`http://localhost:5173/posts/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
               <div dangerouslySetInnerHTML={{
@@ -43,7 +43,7 @@ const Home = () => {
                             : post.body
                     }}
               /> {/* Safely render HTML */}
-              <Link to={`post/${post.id}`}>
+              <Link to={`http://localhost:5173/posts/post/${post.id}`}>
                 <button>Read more</button>
               </Link>
             </div>

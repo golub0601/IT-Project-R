@@ -12,7 +12,7 @@ import Write from "./pages/Write";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { useEffect, useState } from "react";
+import Landing from "./pages/Landing";
 
 const Layout = () => {
   return (
@@ -26,30 +26,34 @@ const Layout = () => {
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Layout/>,
+    path: "/posts", // Any route under /posts gets the Layout
+    element: <Layout />,
     children: [ 
       {
-        path: "/",
-        element: <Home/>,
+        path: "home", // URL will be /posts/home
+        element: <Home />,
       },  
       {
-        path: "/write",
-        element: <Write/>,
+        path: "write", // URL will be /posts/write
+        element: <Write />,
       },
       {
-        path: "/post/:id",
-        element: <SinglePost/>,
+        path: "post/:id", // URL will be /posts/post/:id
+        element: <SinglePost />,
       },
     ]
   },
   {
-    path: "/register",
-    element: <Register/>,
+    path: "/", // Root route for landing
+    element: <Landing />, // No Layout here, so no Navbar/Footer
   },
   {
-    path: "/login",
-    element: <Login/>,
+    path: "/register", // Register route
+    element: <Register />,
+  },
+  {
+    path: "/login", // Login route
+    element: <Login />,
   },
 ]);
 
@@ -62,7 +66,5 @@ function App() {
   </div>
   );
 }
-
-
 
 export default App;

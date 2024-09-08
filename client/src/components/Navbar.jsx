@@ -30,21 +30,21 @@ const Navbar = () => {
     <div className='navbar'>
       <div className="container">
         <div className="logo">
-          <Link to='/'>
+          <Link to='/posts/home'>
             <img src={Logo} alt="logo, link to home" />
           </Link>
         </div>
 
         <div className={`links ${menuOpen ? 'show' : ''}`}>
-          <Link className='link-nav' to="/?cat=loots">LOOTS</Link>
-          <Link className='link-nav' to="/?cat=houses">HOUSES</Link>
-          <Link className='link-nav' to="/?cat=appartments">APPARTMENTS</Link>
+          <Link className='link-nav' to="/posts/home?cat=loots">LOOTS</Link>
+          <Link className='link-nav' to="/posts/home?cat=houses">HOUSES</Link>
+          <Link className='link-nav' to="/posts/home?cat=appartments">APPARTMENTS</Link>
           <p className='separator-line'>|</p>
           <span className="separator-h-line"></span>
           {currUser ? (
             <>
               <span>{currUser.name.toUpperCase()} {currUser.surname?.toUpperCase()}</span>
-              <Link className='link-nav write-btn' to="/write">WRITE NEW POST</Link>
+              <Link className='link-nav write-btn' to="/posts/write">WRITE NEW POST</Link>
               <button className='link-nav logout-btn' onClick={logout}>LOG OUT</button>
             </>
           ) : (
