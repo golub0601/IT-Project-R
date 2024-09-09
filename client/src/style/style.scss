@@ -43,6 +43,37 @@ a {
 
 .app {
     font-family: 'Courier New', Courier, monospace;
+
+    .bookend-hr {
+        position: relative;
+        border-width: 5px;
+        border-color: $deepTeal transparent;
+        height: 11px;
+        border-style: double;
+        width: 80%;
+      }
+      .bookend-hr:before,
+      .bookend-hr:after {
+        position: absolute;
+        bottom: -3.536px;
+        width: 7.071px;
+        height: 7.071px;
+        display: block;
+        border-width: 0 7.071px 7.071px 0;
+        border-color: hsl(0, 16%, 80%);
+        border-style: double;
+        box-sizing: border-box;
+      }
+      .bookend-hr:before {
+        transform: translateZ(0) rotate(-45deg);
+        left: -21px;
+      }
+      .bookend-hr:after {
+        transform: translateZ(0) rotate(135deg);
+        right: -21px;
+      }
+
+    
     .container {
         margin: auto;
         max-width: 90%; 

@@ -46,6 +46,7 @@ const Home = () => {
               <Link to={`http://localhost:5173/posts/post/${post.id}`}>
                 <button>Read more</button>
               </Link>
+              <hr className="bookend-hr" />
             </div>
           </div>
         ))}

@@ -3,13 +3,15 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  background-color: rgba(58, 3, 51, 0.2); /* Dark transparent background */
   align-items: center;
+  border-bottom: 3px solid darkmagenta;
   width: 100%;
 
   .container {
     display: flex;
     margin: auto;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%; // Ensure full width
 
