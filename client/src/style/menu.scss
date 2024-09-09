@@ -8,6 +8,10 @@
     color: #656;
     h1{
         margin-top: 0px;
+        margin-bottom: 20px;
+        &:hover{
+            color: #656;
+        }
     }
     img{
         width: 100%;

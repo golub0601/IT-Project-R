@@ -1,7 +1,12 @@
 @import 'colors.scss';
 .app{
   .container{
-    width: 100% !important;
+    width: 100%;
+  }
+}
+h1{
+  &:hover{
+    color: rgb(216, 227, 238);
   }
 }
 .home {
@@ -16,7 +21,7 @@
 
     .post {
       display: flex;
-      gap: 50px;
+      gap: 50px;  
 
       // Reverse layout for odd-numbered posts
       &:nth-child(2n + 1) {
@@ -30,11 +35,17 @@
           h1 {
             text-align: end;
           }
+          button {
+            background-color: $deepTeal;
+            &:hover {
+              background-color: darken($deepTeal, 10%);
+            }
+          }
         }
       }
 
       .post-img {
-        flex: 4;
+        flex: 4;    
         position: relative;
 
         img {
@@ -48,11 +59,11 @@
           position: absolute;
           height: 100%;
           width: 100%;
-          top: 15px;
-          left: 15px;
+          top: 10px;
+          left: 10px;
           border-radius: 8px;
           z-index: -1;
-          background-color: darken($lightGreen, 20%);
+          background-color: darken($lightGreen, 65%);
         }
       }
 
@@ -83,6 +94,11 @@
           width: max-content;
           padding: 10px 20px;
           font-size: 20px;
+          background-color: #4f3b6d;
+        
+          &:hover {
+            background-color: darken(#4f3b6d, 10%);
+          }
         }
       }
     }
@@ -90,14 +106,17 @@
 
   // Add responsiveness for smaller screens
   @media (max-width: 1024px) {
+    .app{
+      .container{
+        width: 90%;
+      }
+    }
     .posts {
       .post {
         flex-direction: column;
+        gap: 30px;
         align-items: center;
-        // .hr-newpost{
-          
-        // }
-
+        
         &:nth-child(2n+1) {
           flex-direction: column;
           .content {
@@ -119,11 +138,24 @@
         }
 
         .content {
-          margin-top: 120px;
+          margin-top: 20px;
           align-items: center;
           h1 {
+            margin-bottom: 20px;
             font-size: 36px;
             text-align: center;
+          }
+          p{
+            margin-bottom: 20px;
+          }
+          hr{
+            display: none;
+          }
+          button{
+            background-color: $deepTeal;
+            &:hover{
+              background-color: darken($deepTeal,10%);
+            }
           }
         }
       }
@@ -131,11 +163,16 @@
   }
 
   @media (max-width: 768px) {
+    .app{
+      .container{
+        width: 90%;
+      }
+    }
     .posts {
-      gap: 30px;
+      gap: 20px;
 
       .post {
-        gap: 20px;
+        gap: 10px;
 
         .post-img {
           img {

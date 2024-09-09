@@ -1,14 +1,17 @@
 @import 'colors.scss';
+
+
 body{
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, #A66CFF 50%, #4da6a6 50%);
-    background: linear-gradient(to right, #4f3b6d 400px, #4da6a6 400px);
-    background: linear-gradient(96deg, #4c3272 50%, #4da6a6 50%);
-    background-size: 100% 100%; /* Ensures the gradient covers the entire window */
-    background-attachment: fixed;
+    background: linear-gradient(96deg, rgba(76, 50, 114, 0.9) 50%, rgba(77, 166, 166, 0.9) 50%), /* Base gradient */
+                radial-gradient(circle at top left, #A66CFF, transparent 50%), /* Radial gradient from top left */
+                radial-gradient(circle at bottom right, #4da6a6, transparent 50%); /* Radial gradient from bottom right */
+    background-size: cover, 150% 150%, 150% 150%; /* Layered background sizes */
+    background-blend-mode: overlay, screen; /* Blend modes for extra depth */
+    background-attachment: fixed; /* Fixed attachment for parallax effect */
     color: rgb(216, 227, 238);
     font-family: 'Courier New', Courier, monospace;
 }
@@ -37,13 +40,13 @@ button {
 a {
     color: rgb(216, 227, 238);
     &:hover {
-        color: cadetblue;
+        color: aliceblue;
+        font-weight: 600;
     }
 }
 
 .app {
     font-family: 'Courier New', Courier, monospace;
-
     .bookend-hr {
         position: relative;
         border-width: 5px;
