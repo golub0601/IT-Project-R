@@ -14,6 +14,29 @@ body{
     background-attachment: fixed; /* Fixed attachment for parallax effect */
     color: rgb(216, 227, 238);
     font-family: 'Courier New', Courier, monospace;
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #580b3c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0.5;
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      .scroll-top-btn:hover {
+        opacity: 1;
+        background-color: #580b3c;
+      }
 }
 
 input, textarea, select{

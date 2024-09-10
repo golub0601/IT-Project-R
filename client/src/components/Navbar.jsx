@@ -9,10 +9,21 @@ const Navbar = () => {
   const { currUser, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);  // State to handle the hamburger menu
   const hamburgerRef = useRef(null);
+  const linksHamRef = useRef(null);
+  const [loading, setLoading] = useState(true)
+  
+  const handleClickOnLinkInHamburger = () => {
+    setMenuOpen(false);
+    // setTimeout(() => {
+    //   setPosts(res.data);
+    //   setLoading(false);  // Stop loading after posts are fetched and delay is complete
+    // }, 1200);
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       // console.log(menuOpen);
-      if (menuOpen && !hamburgerRef.current.contains(event.target)){
+      if (menuOpen && !hamburgerRef.current.contains(event.target) && !linksHamRef.current.contains(event.target)){
         console.log("clicked!");
         setMenuOpen(false); 
       }
@@ -35,10 +46,10 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className={`links ${menuOpen ? 'show' : ''}`}>
-          <Link className='link-nav' to="/posts/home?cat=loots">LOOTS</Link>
-          <Link className='link-nav' to="/posts/home?cat=houses">HOUSES</Link>
-          <Link className='link-nav' to="/posts/home?cat=appartments">APPARTMENTS</Link>
+        <div className={`links ${menuOpen ? 'show' : ''}`} ref={linksHamRef}>
+          <Link className='link-nav' to="/posts/home?cat=loots" onClick={handleClickOnLinkInHamburger}>LOOTS</Link>
+          <Link className='link-nav' to="/posts/home?cat=houses" onClick={handleClickOnLinkInHamburger}>HOUSES</Link>
+          <Link className='link-nav' to="/posts/home?cat=appartments" onClick={handleClickOnLinkInHamburger}>APPARTMENTS</Link>
           <p className='separator-line'>|</p>
           <span className="separator-h-line"></span>
           {currUser ? (

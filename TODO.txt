@@ -1,13 +1,12 @@
 - pagination na home page 
-- animacija za ulaz na home page
 - read more dugme na postove
 - dinamicko loadovanje kategorija u navbar i radio dugmad kod editovanja i pisanja posta u write page
 
-- pretraga po nekim filterima za postove
-- dodati lokacije u kategorije ili nedje 
+- pretraga po nekim filterima za postove ???
+- dodati lokacije u kategorije ili nedje ???
 
 
-- responsive single post page
+- responsive single post malo doraditi menu section
 - responsive write page obavezno
 
 - body field u write ne prikazuje bold kako treba

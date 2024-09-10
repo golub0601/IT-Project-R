@@ -12,6 +12,7 @@ import "../style/single-post.scss";
 
 
 const SinglePost = () => {
+  const [showScroll, setShowScroll] = useState(false);  // State for scroll button visibility
   const [post, setPost] = useState(null);  // Initialize as null for the post
   const [recommendedPosts, setRecommendedPosts] = useState([]);  // Initialize an empty array for recommended posts
 
@@ -20,7 +21,33 @@ const SinglePost = () => {
   const { currUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const scrollToTop = () => {
+    const scrollStep = -window.scrollY / 30;  // Divide scroll into steps
+    const scrollInterval = setInterval(() => {
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep);  
+      } else {
+        clearInterval(scrollInterval);  
+      }
+    }, 25);  // Run every 25ms
+  };
+
+    // Handle Scroll Event`
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 300) {  // Show button after scrolling 300px
+          setShowScroll(true);
+        } else {
+          setShowScroll(false);
+        }
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);  // Cleanup listener on component unmount
+    }, []);
+
   useEffect(() => {
+    scrollToTop();
     const fetchPostAndRecommended = async () => {
       try {
         const res = await axios.get(`http://localhost:8800/api/posts/${postId}/with-recommendations`);
@@ -73,6 +100,12 @@ const SinglePost = () => {
       <div className="menu">
         <Menu posts={recommendedPosts} />
       </div>
+      {/* Scroll to Top Button */}
+      {showScroll && (
+        <button className="scroll-top-btn" onClick={scrollToTop}>
+          ↑ Scroll to Top
+        </button>
+      )}
     </div>
   );
 }

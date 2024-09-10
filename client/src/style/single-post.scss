@@ -1,88 +1,111 @@
 @import 'colors.scss';
 
-.singlePost{
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    margin-left: 60px;
-    margin-right: 60px;
-    max-width: 100%;
-    .content{
-        flex: 8;
-        img{
-            max-width: 100%;
-            max-height: 700px;
-            object-fit: cover;
-        }
-        .info{
-            padding: 10px;
-            width:420px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            .user-img{
-                img{
-                    width: 100px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                }
-            }
-            .text-info{
-                padding-right: 10px;
-                max-width: 200px;
-                display: flex;
-                flex-direction: column;
-                color: aliceblue;
-                gap: 10px;
-                span{
-                    color: darken($deepTeal, 20%);
-                    font-weight: 600;
-                    a{
-                        text-decoration: none;
-                    }
-                }
-            }
-            .edit-links{
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                .edit{
-                    background: green;
-                    border: none;
-                    width: 120px;
-                    padding: 5px;
-                    &:hover{
-                        background-color: darken(green,10%);
-                    }
-                    
-                }
-                .delete{
-                    background-color: rgb(209, 29, 29);
-                    border: none;
-                    width: 120px;
-                    padding: 5px;
-                    &:hover{
-                        background-color: darken(rgb(209, 29, 29),10%);
-                    }
-                }
-            }
-        }
-        .post-text{
-            margin-top: 50px;
-            color:darken($deepTeal, 20%);
-            font-size: 18px;
-            h1{
-                font-size: 42px;
-                color: aliceblue;
-            }
-            p{
-                color: aliceblue;
-            }
-        }
+.singlePost {
+  display: flex;
+//   flex-direction: column; // Stack content vertically by default
+  margin: 40px 60px;
+  max-width: 100%;
 
-    }
-    .menu{
-        flex: 4;
+  .content {
+    flex: 8;
+    img {
+      max-width: 100%;
+      max-height: 700px;
+      object-fit: cover;
     }
 
+    .info {
+      padding: 10px;
+      width: 100%; // Full width on smaller screens
+      display: flex;
+      flex-direction: column; // Stack vertically on small screens
+      gap: 10px;
+      align-items: flex-start;
+
+      .user-img {
+        img {
+          width: 100px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .text-info {
+        padding-right: 10px;
+        max-width: 100%; // Full width on smaller screens
+        display: flex;
+        flex-direction: column;
+        color: aliceblue;
+        gap: 10px;
+
+        span {
+          color: darken($deepTeal, 20%);
+          font-weight: 600;
+
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+
+      .edit-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .edit, .delete {
+          width: 100%; // Full width on smaller screens
+        }
+
+        .edit {
+          background: green;
+          border: none;
+          padding: 5px;
+
+          &:hover {
+            background-color: darken(green, 10%);
+          }
+        }
+
+        .delete {
+          background-color: rgb(209, 29, 29);
+          border: none;
+          padding: 5px;
+
+          &:hover {
+            background-color: darken(rgb(209, 29, 29), 10%);
+          }
+        }
+      }
+    }
+
+    .post-text {
+      margin-top: 50px;
+      color: darken($deepTeal, 20%);
+      font-size: 18px;
+
+      h1 {
+        font-size: 32px; // Adjust font size for smaller screens
+        color: aliceblue;
+      }
+
+      p {
+        color: aliceblue;
+      }
+    }
+  }
+
+  .menu {
+    flex: 4;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack content vertically on small screens
+    gap: 40px;
+
+    .menu {
+      flex: none; // Remove flex property on small screens
+      margin-top: 20px; // Add margin to separate from content
+    }
+  }
 }
