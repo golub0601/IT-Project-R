@@ -1,12 +1,13 @@
 
-- img is uploaded indicator i bug za upload bez slike
+- bug za upload bez slike
 - responsive single post malo doraditi menu section
-- responsive write page obavezno
 - body field u write ne prikazuje bold kako treba
-- loading spinner on every load of home posts
+
 - design paginate links
 
-- dinamicko loadovanje kategorija u navbar i radio dugmad kod editovanja i pisanja posta u write page
+- dinamicko loadovanje kategorija u navbar i 
+    radio dugmad kod editovanja i
+    pisanja posta u write page
 
 - pretraga po nekim filterima za postove ???
 - dodati lokacije u kategorije ili nedje ???
