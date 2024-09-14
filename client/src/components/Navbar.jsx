@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import Logo from "../imgs/logo.png";
 import { Link } from 'react-router-dom';
-import "../style/style.scss";
+// import "../style/style.scss";
 import "../style/navbar.scss";
 import { AuthContext } from '../context/authContext.jsx';
 

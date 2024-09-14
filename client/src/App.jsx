@@ -45,7 +45,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/", // Root route for landing
-    element: <Landing />, // No Layout here, so no Navbar/Footer
+    element: <Landing />, // Landing Route
   },
   {
     path: "/register", // Register route

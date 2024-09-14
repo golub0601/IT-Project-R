@@ -29,7 +29,7 @@ const Login = () => {
     try{
       await login(inputs)
       // console.log(currUser);
-      navigate("/");
+      navigate("/posts/home");
     }
     catch(e) {
       setError(e.response.data)

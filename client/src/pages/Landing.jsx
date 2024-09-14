@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import "../style/landing.scss";
 import { useNavigate } from 'react-router-dom';
+import "../style/landing.scss";
 
 const Landing = () => {
     const [showButton, setShowButton] = useState(false);

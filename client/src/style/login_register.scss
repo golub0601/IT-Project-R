@@ -25,10 +25,20 @@
         width: 220px;
         gap: 20px;
 
+        ::placeholder{
+            color: $deepTeal;
+            font-weight: 600;
+        }   
+
         input{
             padding: 10px;
             border: none;
             border-bottom: 1px solid grey;
+            color: $deepTeal;
+            font-weight: 600;
+            &:focus{
+                outline-color: $deepTeal;
+            }
         }
 
         button{
@@ -50,7 +60,11 @@
         span{
             font-size: 14px;
             text-align: center;
-
+            color: $deepTeal;
+        }
+        a{
+            color: darken($color: $deepTeal, $amount: 10%);
+            text-decoration: underline;
         }
     }
 }

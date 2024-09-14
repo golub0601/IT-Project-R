@@ -1,20 +1,19 @@
-- pagination na home page 
-- read more dugme na postove
+
+--loading spinner on home page
+
+- img is uploaded indicator i bug za upload bez slike
+- responsive single post malo doraditi menu section
+- responsive write page obavezno
+- body field u write ne prikazuje bold kako treba
+- loading spinner on every load of home posts
+- design paginate links
+
 - dinamicko loadovanje kategorija u navbar i radio dugmad kod editovanja i pisanja posta u write page
 
 - pretraga po nekim filterima za postove ???
 - dodati lokacije u kategorije ili nedje ???
 
-
-- responsive single post malo doraditi menu section
-- responsive write page obavezno
-
-- body field u write ne prikazuje bold kako treba
-- img is uploaded indicator?
-
-
 - upload na profil slike? i uredjivanje profila
-
 
 - admin page
 - admin page and stuff

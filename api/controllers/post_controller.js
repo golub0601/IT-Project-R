@@ -7,39 +7,73 @@ export const getAllPosts = async (req, res) => {
     try {
         const db = await connect();
         const category_req = req.query.cat;
+        const page = parseInt(req.query.page) || 1; // Current page
+        const limit = parseInt(req.query.limit) || 6; // Number of posts per page
+        const offset = (page - 1) * limit;
+        let category_id;
         let query = "SELECT * FROM posts";
+        let countQuery = "SELECT COUNT(*) AS total FROM posts";  // Query to count total posts
         var result = '';
+        let totalCountResult;
+        
         if (category_req) {
             const cat_q = "SELECT id FROM categories WHERE name = @Cat";
             const category_q_result = await db.request()
                 .input('Cat', sql.VarChar, category_req)
                 .query(cat_q);
+            // console.log(category_q_result);
             
-            const category_id = category_q_result.recordset.length === 1 
+            category_id = category_q_result.recordset.length === 1 
                 ? category_q_result.recordset[0]['id']
                 : null;
-
-            if (category_id) {
-                query += " WHERE category_id = @Cat_id";
-                query += " ORDER BY id DESC";
-                result = await db.request()
-                .input("Cat_id", sql.Int, category_id)
-                .query(query);
-            }
-        
         }
-        else{
+
+        if (category_id) {
+            query += " WHERE category_id = @Cat_id";
+            countQuery += " WHERE category_id = @Cat_id";  // Apply same filter to count
             query += " ORDER BY id DESC";
+            query += " OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";  // Pagination query
             result = await db.request()
-            .query(query);
+                .input("Cat_id", sql.Int, category_id)
+                .input("Offset", sql.Int, offset)
+                .input("Limit", sql.Int, limit)
+                .query(query);
+            totalCountResult = await db.request().input("Cat_id", sql.Int, category_id).query(countQuery);
+        }
+
+        else {
+            query += " ORDER BY id DESC";
+            query += " OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
+            try {
+                result = await db.request()
+                    .input("Offset", sql.Int, offset)
+                    .input("Limit", sql.Int, limit)
+                    .query(query);
+                // console.log("///////////////////////");
+                // console.log(result);
+                // console.log("///////////////////////");    
+            } catch (error) {
+                console.log(error);  
+                return res.status(500).json({ error: 'Database error', details: error }); 
             }
-        return res.json(result.recordset);
+            
+            totalCountResult = await db.request().query(countQuery);
+        }
+
+        // Fetch total count for pagination
+        const totalCount = totalCountResult.recordset[0].total;
+
+        return res.json({
+            posts: result.recordset,
+            total: totalCount,
+            page: page,
+            totalPages: Math.ceil(totalCount / limit)
+        });
     } catch (err) {
         console.error('Error during fetching all posts:', err);
         return res.status(500).json({ error: 'Database error', details: err });
     }
 };
-
 // Fetch a single post by ID and reccomended posts
 export const getPost = async (req, res) => {
     try {
@@ -87,9 +121,6 @@ export const getPost = async (req, res) => {
     }
 };
 
-
-
-
 export const addPost = (req, res) => {
     
     
@@ -110,7 +141,7 @@ export const addPost = (req, res) => {
         const values = [
             req.body.title,
             req.body.desc,
-            req.body.cover_img,
+            req.body.cover_img, 
             req.body.category_id,
             req.body.date,
             userInfo.id
