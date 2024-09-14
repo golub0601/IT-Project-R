@@ -29,6 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     scrollToTop();
+    setLoading(true);
     const fetchPosts = async () => {
       try {
         // Properly construct the API URL
@@ -39,7 +40,7 @@ const Home = () => {
           setPosts(res.data.posts);  // Update with fetched posts
           setTotalPages(res.data.totalPages);  // Update total pages
           setLoading(false);
-        }, 1200);
+        }, 1000);
       } catch (error) {
         console.log(error);
       }
@@ -49,6 +50,7 @@ const Home = () => {
 
   useEffect(()=>{
     setPage(1);
+    setLoading(true);
   }, [cat])
 
   const handleNextPage = () => {
@@ -67,7 +69,7 @@ const Home = () => {
     }
   };
 
-  // Scroll to Top and handle scrolling event remains the same
+  
   const scrollToTop = () => {
     const scrollStep = -window.scrollY / 30;  // Divide scroll into steps
     const scrollInterval = setInterval(() => {

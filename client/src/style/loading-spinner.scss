@@ -1,3 +1,5 @@
+@import 'colors.scss';
+
 .spinner-container {
     display: flex;
     justify-content: center;
@@ -7,12 +9,12 @@
   }
   
   .loading-spinner {
-    border: 8px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #000;
+    border: 22px solid $deepTeal;
+    border-left-color: darken($purple, 10%);
     border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    animation: spin 1s linear infinite;
+    width: 144px;
+    height: 144px;
+    animation: spin 0.9s linear infinite;
   }
   
   @keyframes spin {

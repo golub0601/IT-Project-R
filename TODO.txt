@@ -1,6 +1,4 @@
 
---loading spinner on home page
-
 - img is uploaded indicator i bug za upload bez slike
 - responsive single post malo doraditi menu section
 - responsive write page obavezno
