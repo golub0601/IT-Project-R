@@ -1,28 +1,26 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import Logo from "../imgs/logo.png";
-import { Link } from 'react-router-dom';
-// import "../style/style.scss";
+import { Link, useLocation } from 'react-router-dom';
 import "../style/navbar.scss";
 import { AuthContext } from '../context/authContext.jsx';
 
 const Navbar = () => {
   const { currUser, logout } = useContext(AuthContext);
-  const [menuOpen, setMenuOpen] = useState(false);  // State to handle the hamburger menu
+  const [menuOpen, setMenuOpen] = useState(false);  
   const hamburgerRef = useRef(null);
   const linksHamRef = useRef(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const cat = queryParams.get('cat'); // Extract the 'cat' parameter value
   
   const handleClickOnLinkInHamburger = () => {
     setMenuOpen(false);
-    // setTimeout(() => {
-    //   setPosts(res.data);
-    //   setLoading(false);  // Stop loading after posts are fetched and delay is complete
-    // }, 1200);
   }
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // console.log(menuOpen);
+
       if (menuOpen && !hamburgerRef.current.contains(event.target) && !linksHamRef.current.contains(event.target)){
         console.log("clicked!");
         setMenuOpen(false); 
@@ -47,16 +45,18 @@ const Navbar = () => {
         </div>
 
         <div className={`links ${menuOpen ? 'show' : ''}`} ref={linksHamRef}>
-          <Link className='link-nav' to="/posts/home?cat=loots" onClick={handleClickOnLinkInHamburger}>LOOTS</Link>
-          <Link className='link-nav' to="/posts/home?cat=houses" onClick={handleClickOnLinkInHamburger}>HOUSES</Link>
-          <Link className='link-nav' to="/posts/home?cat=appartments" onClick={handleClickOnLinkInHamburger}>APPARTMENTS</Link>
+          <Link className={`link-nav ${cat=='loots' ? 'active' : ''}`} to="/posts/home?cat=loots" onClick={handleClickOnLinkInHamburger}>LOOTS</Link>
+          <Link className={`link-nav ${cat=='houses' ? 'active' : ''}`} to="/posts/home?cat=houses" onClick={handleClickOnLinkInHamburger}>HOUSES</Link>
+          <Link className={`link-nav ${cat=='appartments' ? 'active' : ''}`} to="/posts/home?cat=appartments" onClick={handleClickOnLinkInHamburger}>APPARTMENTS</Link>
           <p className='separator-line'>|</p>
           <span className="separator-h-line"></span>
           {currUser ? (
             <>
               <span>{currUser.name.toUpperCase()} {currUser.surname?.toUpperCase()}</span>
               <Link className='link-nav write-btn' to="/posts/write">WRITE NEW POST</Link>
+              {currUser?.role > 1000 && <Link className='link-nav write-btn' to="/admin">ADMIN PAGE</Link>}
               <button className='link-nav logout-btn' onClick={logout}>LOG OUT</button>
+              
             </>
           ) : (
             <>

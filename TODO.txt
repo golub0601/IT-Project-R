@@ -1,11 +1,12 @@
+- admin page
+- admin page and stuff
+- pretraga po nekim filterima u admina za usere i postove
 
 - share buttons on posts on home i u single poste view
 
 
 - upload na profil slike? i uredjivanje profila
 
-- admin page
-- admin page and stuff
 - pretraga po nekim filterima u admina za usere i postove
 
 - pretraga po nekim filterima za postove ???

@@ -1,0 +1,110 @@
+@import 'colors.scss';
+.admin-container {
+    display: flex;
+    justify-content: center; // Centers the table horizontally
+    align-items: center;     // Centers the content vertically (optional)
+    height: 100vh;           // Full-height container to center vertically
+    padding: 20px;
+    flex-direction: column;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  
+    .tab {
+      padding: 10px 20px;
+      margin-right: 10px;
+      border: 1px solid $greyTeal;
+      background-color: $deepTeal;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &.active {
+        background-color: $purple;
+        color: white;
+        font-weight: bold;
+      }
+  
+      &:hover {
+        background-color: darken($deepTeal, 10%);
+      }
+    }
+  }
+  
+  .table-container {
+    display: flex;
+    justify-content: center;
+    width: 100%; // Optional: Adjust based on your layout
+  }
+  
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add a shadow for depth
+    border-radius: 8px;
+    overflow: hidden;
+  
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid $greyTeal; // Border color for separation
+    }
+  
+    th {
+      background-color: $purple;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  
+    tbody tr {
+      &:nth-child(odd) {
+        background-color: $greyTeal; // Alternate row colors
+      }
+  
+      &:nth-child(even) {
+        background-color: #f9f9f9; // Slightly lighter for contrast
+      }
+  
+      &:hover {
+        background-color: $deepTeal;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+    }
+  
+    td {
+      color: #333;
+      &:first-child {
+        font-weight: bold; // Highlight the first column (ID)
+      }
+    }
+  
+    button {
+      margin: 0 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background-color: $deepTeal;
+      color: white;
+      font-size: 0.9em;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: darken($deepTeal, 10%);
+      }
+  
+      &.delete-btn {
+        background-color: $softCoral;
+        &:hover {
+          background-color: darken($softCoral, 10%);
+        }
+      }
+    }
+  }
+  

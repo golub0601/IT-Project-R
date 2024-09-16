@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Landing from "./pages/Landing";
+import Admin from "./pages/Admin";
 
 const Layout = () => {
   return (
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/register", // Register route
     element: <Register />,
+  },
+  {
+    path: "/admin",
+    element: <Admin/>
   },
   {
     path: "/login", // Login route
