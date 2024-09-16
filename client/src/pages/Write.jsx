@@ -37,6 +37,20 @@ const Write = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Collect missing fields for alert
+    let missingFields = [];
+    if (!title) missingFields.push("Title");
+    if (!value || value.trim() === "") missingFields.push("Content");
+    if (!category_id) missingFields.push("Category");
+    if (!cover_img) missingFields.push("Cover Image");
+
+    // If there are missing fields, show an alert and stop form submission
+    if (missingFields.length > 0) {
+      window.alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
+      return;
+    }
+
     const imgUrl = await upload();
 
     try {
@@ -70,9 +84,18 @@ const Write = () => {
           value={title}
           placeholder='Title of post'
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
+        
         <div className="editorContainer">
-          <ReactQuill theme="snow" value={value} onChange={setValue} className='richEditor' />
+          <ReactQuill
+            theme="snow"
+            value={value}
+            onChange={setValue}
+            className='richEditor'
+            placeholder='Write something...'
+            required
+          />
         </div>
       </div>
 
@@ -102,6 +125,7 @@ const Write = () => {
             onChange={handleImageChange} // Handle image selection
             name="cover_image"
             id="cover_image"
+            required
           />
           Upload Photo
         </label>
@@ -116,7 +140,7 @@ const Write = () => {
         </div>
 
         <hr />
-        <button onClick={handleSubmit}>Publish post</button>
+        <button className='publish-btn' onClick={handleSubmit}>Publish post</button>
       </div>
     </div>
   );

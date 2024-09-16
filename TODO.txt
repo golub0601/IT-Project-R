@@ -1,22 +1,22 @@
 
-- bug za upload bez slike
-- responsive single post malo doraditi menu section
-- body field u write ne prikazuje bold kako treba
+- share buttons on posts on home i u single poste view
 
-- design paginate links
-
-- dinamicko loadovanje kategorija u navbar i 
-    radio dugmad kod editovanja i
-    pisanja posta u write page
-
-- pretraga po nekim filterima za postove ???
-- dodati lokacije u kategorije ili nedje ???
 
 - upload na profil slike? i uredjivanje profila
 
 - admin page
 - admin page and stuff
 - pretraga po nekim filterima u admina za usere i postove
+
+- pretraga po nekim filterima za postove ???
+- dodati lokacije u kategorije ili nedje ???
+
+- dinamicko loadovanje kategorija u navbar i 
+    radio dugmad kod editovanja i
+    pisanja posta u write page
+
+
+
 
 
 

@@ -2,16 +2,18 @@
 
 .singlePost {
   display: flex;
-//   flex-direction: column; // Stack content vertically by default
   margin: 40px 60px;
   max-width: 100%;
-
+  gap: 40px;
+  
   .content {
     flex: 8;
+
     img {
       max-width: 100%;
       max-height: 700px;
       object-fit: cover;
+      border-radius: 5%;
     }
 
     .info {
@@ -97,15 +99,180 @@
 
   .menu {
     flex: 4;
+
+    img {
+      border-radius: 5%;
+    }
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column; // Stack content vertically on small screens
-    gap: 40px;
+  .menu-container {
+    width: 100%;
+    height: auto; // Adjust height to auto for responsiveness
+    margin-top: 0;
+    padding-top: 0;
+    color: #656;
+  
+    h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: aliceblue;
+
+      &:hover {
+        color: aliceblue;
+      }
+    }
+  
+    img {
+      width: 100%;
+      height: auto; // Adjust height to auto for responsiveness
+      object-fit: cover;
+    }
+  
+    h2 {
+      font-size: 28px;
+      color: aliceblue;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-weight: 1000;
+    }
+  
+    .read-post-btn {
+      padding: 5px;
+      width: 100%; // Full width on smaller screens
+      max-width: 300px; // Max width to avoid excessive stretching
+      margin: auto;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: darken($deepTeal, 10%); // Example background color
+      color: aliceblue;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: darken($deepTeal, 20%);
+      }
+    }
+  }
+
+  // Add responsiveness for smaller screens
+  @media (max-width: 1024px) {
+    flex-direction: column; // Stack flex items vertically on medium screens
+    margin: 20px 30px;
+    gap: 20px;
+
+    .content {
+      flex: none;
+      width: 100%;
+
+      .info {
+        padding: 8px;
+      }
+
+      .post-text {
+        margin-top: 20px;
+        font-size: 16px;
+
+        h1 {
+          font-size: 28px;
+        }
+      }
+    }
 
     .menu {
-      flex: none; // Remove flex property on small screens
-      margin-top: 20px; // Add margin to separate from content
+      flex: none;
+      width: 100%;
+    }
+  }
+
+  // Add responsiveness for smaller screens like mobile
+  @media (max-width: 768px) {
+    margin: 10px 20px;
+    gap: 10px;
+
+    .content {
+      img {
+        max-height: 500px; // Adjust image height for smaller screens
+      }
+
+      .info {
+        padding: 5px;
+
+        .user-img img {
+          width: 80px;
+        }
+
+        .text-info {
+          padding-right: 0;
+        }
+      }
+
+      .post-text {
+        font-size: 14px;
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+    }
+    .menu{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .menu-container {
+      text-align: center;
+      margin-top: 80px;
+      width: 90%;
+      h1 {
+        font-size: 22px;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin: 5px 10px;
+
+    .content {
+      img {
+        max-height: 300px; // Adjust image height for very small screens
+      }
+
+      .info {
+        padding: 2px;
+
+        .user-img img {
+          width: 60px;
+        }
+
+        .post-text {
+          font-size: 12px;
+
+          h1 {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .menu-container {
+      h1 {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .read-post-btn {
+        max-width: 100%; // Stretch button to full width on small screens
+      }
     }
   }
 }

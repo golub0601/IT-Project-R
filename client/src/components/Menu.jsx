@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import "../style/style.scss";
-import "../style/menu.scss";
 import LoadingSpinner from './LoadingSpinner.jsx';
 
 

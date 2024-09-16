@@ -29,7 +29,9 @@ const Home = () => {
 
   useEffect(() => {
     scrollToTop();
-    setLoading(true);
+    setTimeout(()=>{
+      setLoading(true);
+    }, 200)
     const fetchPosts = async () => {
       try {
         // Properly construct the API URL
@@ -57,6 +59,7 @@ const Home = () => {
     if (page < totalPages) {
       setPage(page + 1);
     }
+
   };
 
   const jumpToPage = () => {

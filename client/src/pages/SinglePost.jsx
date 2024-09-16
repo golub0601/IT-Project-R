@@ -63,7 +63,7 @@ const SinglePost = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:8800/api/posts/${postId}`);
-      navigate('/');
+      navigate('/posts/home');
     } catch (error) {
       console.error('Error deleting post:', error);
     }

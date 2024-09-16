@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/authContext';
-
 import "../style/login_register.scss"
 
 
@@ -49,6 +48,8 @@ const Login = () => {
             <p>{err}</p>
             <span>Do not have account? <Link to='/register'>Register</Link></span>
         </form>
+        <br />
+        <span>Or just <Link to='/posts/home'>look around</Link></span>
     </div>
   )
 }
