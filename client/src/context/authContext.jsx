@@ -7,17 +7,34 @@ export const AuthContextProvider = ({ children }) => {
     const [currUser, setCurrentUser] = useState(
         JSON.parse(localStorage.getItem("user")) || null
     );
+    const [error, setError] = useState(null);  // For error handling
 
+    // Login function
     const login = async (inputs) => {
-        const res = await axios.post('http://localhost:8800/api/auth/login', inputs);
-        setCurrentUser(res.data);
-    }
+        try {
+            const res = await axios.post('http://localhost:8800/api/auth/login', inputs, {
+                withCredentials: true  // Important to include cookies with requests
+            });
+            setCurrentUser(res.data);
+            setError(null); // Reset error if login is successful
+        } catch (err) {
+            setError(err.response.data || "An error occurred during login.");
+        }
+    };
 
+    // Logout function
     const logout = async () => {
-        await axios.post('http://localhost:8800/api/auth/logout');
-        setCurrentUser(null);
-    }
+        try {
+            await axios.post('http://localhost:8800/api/auth/logout', {}, {
+                withCredentials: true
+            });
+            setCurrentUser(null);
+        } catch (err) {
+            setError(err.response.data || "An error occurred during logout.");
+        }
+    };
 
+    // Store user info in localStorage
     useEffect(() => {
         if (currUser) {
             localStorage.setItem("user", JSON.stringify(currUser));
@@ -27,8 +44,8 @@ export const AuthContextProvider = ({ children }) => {
     }, [currUser]);
 
     return (
-        <AuthContext.Provider value={{ currUser, login, logout }}>
+        <AuthContext.Provider value={{ currUser, login, logout, error }}>
             {children}
         </AuthContext.Provider>
     );
-}
+};
