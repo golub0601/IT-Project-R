@@ -49,6 +49,20 @@ const Admin = () => {
     }
   }, [page, activeTab, cat]);
 
+  // Delete Post Handler
+  const handleDeletePost = async (postId) => {
+    try {
+      await axios.delete(`http://localhost:8800/api/posts/${postId}`); // Make the DELETE request
+
+      // Remove the deleted post from the state to update the UI
+      setPosts(posts.filter(post => post.id !== postId));
+      alert('Post deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      alert('Failed to delete post');
+    }
+  };
+
   // Pagination controls
   const handlePrevPage = () => {
     if (page > 1) setPage(page - 1);
@@ -116,8 +130,12 @@ const Admin = () => {
                           )}
                         </td>
                         <td>
-                          <button className="edit-btn">Edit</button>
-                          <button className="delete-btn">Delete</button>
+                          <button className="delete-btn" onClick={(e) => {
+                            e.stopPropagation(); // Prevent triggering row click event
+                            handleDeletePost(post.id);
+                          }}>
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))

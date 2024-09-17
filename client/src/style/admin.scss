@@ -111,7 +111,7 @@
     }
   
     button {
-      margin: 0 5px;
+      // margin: 0 5px;
       padding: 5px 10px;
       cursor: pointer;
       border: none;
@@ -127,6 +127,7 @@
   
       &.delete-btn {
         background-color: $softCoral;
+        padding: 10px 20px;
         &:hover {
           background-color: darken($softCoral, 15%);
         }
