@@ -1,20 +1,19 @@
-- admin page
+- disable user
+- delete post
 - admin page and stuff
+
+- search po text u naslovima
 - pretraga po nekim filterima u admina za usere i postove
 
 - share buttons on posts on home i u single poste view
 
-
-- upload na profil slike? i uredjivanje profila
-
-- pretraga po nekim filterima u admina za usere i postove
-
+- upload na profil slike? i uredjivanje profila ??
 - pretraga po nekim filterima za postove ???
 - dodati lokacije u kategorije ili nedje ???
 
 - dinamicko loadovanje kategorija u navbar i 
     radio dugmad kod editovanja i
-    pisanja posta u write page
+    pisanja posta u write page ??
 
 
 

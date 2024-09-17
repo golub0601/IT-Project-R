@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import Logo from "../imgs/logo.png";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "../style/navbar.scss";
-import { AuthContext } from '../context/authContext.jsx';
+import { AuthContext} from '../context/authContext.jsx';
 
 const Navbar = () => {
   const { currUser, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);  
   const hamburgerRef = useRef(null);
   const linksHamRef = useRef(null);
-  const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const navigate  = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const cat = queryParams.get('cat'); // Extract the 'cat' parameter value
   
@@ -18,11 +18,22 @@ const Navbar = () => {
     setMenuOpen(false);
   }
 
+  const navigateHome = async () => {
+    
+    try{
+      await logout();
+      navigate('../posts/home')
+    }catch(err){
+      console.log(err);
+      console.log('Error in navbar -> navigateHome for logout')
+    }
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
 
       if (menuOpen && !hamburgerRef.current.contains(event.target) && !linksHamRef.current.contains(event.target)){
-        console.log("clicked!");
+        // console.log("clicked!");
         setMenuOpen(false); 
       }
     };
@@ -55,7 +66,7 @@ const Navbar = () => {
               <span>{currUser.name.toUpperCase()} {currUser.surname?.toUpperCase()}</span>
               <Link className='link-nav write-btn' to="/posts/write">WRITE NEW POST</Link>
               {currUser?.role > 1000 && <Link className='link-nav write-btn' to="/admin">ADMIN PAGE</Link>}
-              <button className='link-nav logout-btn' onClick={logout}>LOG OUT</button>
+              <button className='link-nav logout-btn' onClick={navigateHome}>LOG OUT</button>
               
             </>
           ) : (

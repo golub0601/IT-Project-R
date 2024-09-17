@@ -1,17 +1,21 @@
 @import 'colors.scss';
 .admin-container {
     display: flex;
-    justify-content: center; // Centers the table horizontally
-    align-items: center;     // Centers the content vertically (optional)
-    height: 100vh;           // Full-height container to center vertically
-    padding: 20px;
+    justify-content: center; 
+    align-items: center;     
     flex-direction: column;
+    padding: 20px;
+    h2{
+        text-align: center;
+        margin-bottom: 20px;
+    }
   }
   
   .tabs {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    margin-top: 10px;
   
     .tab {
       padding: 10px 20px;
@@ -23,30 +27,52 @@
       transition: background-color 0.3s ease;
   
       &.active {
-        background-color: $purple;
+        background-color: darken($deepTeal, 15%);
         color: white;
-        font-weight: bold;
+        font-weight: 700;
+        border: 2px solid #ffffff;
+        padding: 18px;
+        // text-decoration: underline;
+        box-sizing: border-box;
+        animation: border-animation 0.5s forwards
       }
+      @keyframes border-animation {
+        0% {
+          border-top: $purple 2px solid;
+          border-right: $purple 2px solid;
+        }
+        100% {
+          border-top: #7992a4 2px solid;
+          border-right: #7992a4 2px solid;
+          border-radius: 8px;
+          font-weight: 700;
+        }
+    }
+
   
       &:hover {
         background-color: darken($deepTeal, 10%);
       }
     }
   }
+
+  .tab-content{
+    width: 90vw;
+  }
   
   .table-container {
     display: flex;
     justify-content: center;
-    width: 100%; // Optional: Adjust based on your layout
   }
   
   table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add a shadow for depth
     border-radius: 8px;
     overflow: hidden;
+    
   
     th, td {
       padding: 12px 15px;
@@ -102,7 +128,7 @@
       &.delete-btn {
         background-color: $softCoral;
         &:hover {
-          background-color: darken($softCoral, 10%);
+          background-color: darken($softCoral, 15%);
         }
       }
     }

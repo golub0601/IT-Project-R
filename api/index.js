@@ -54,7 +54,7 @@ app.post("/api/upload", upload.single("cover_img"), function (req, res) {
 });
 
 app.use('/api/posts', postRoutes)
-app.use('/api/user', userRoutes)
+app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes)
 
 
