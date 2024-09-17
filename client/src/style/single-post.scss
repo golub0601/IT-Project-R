@@ -1,5 +1,14 @@
 @import 'colors.scss';
 
+.delete {
+  background-color: rgb(209, 29, 29);
+  border: none;
+  padding: 5px;
+  &:hover{
+    background-color: darken(rgb(209, 29, 29),10%);
+  }
+}
+
 .singlePost {
   display: flex;
   margin: 40px 60px;

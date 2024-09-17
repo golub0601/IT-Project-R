@@ -1,8 +1,8 @@
 import express from 'express'
-import { allUsers } from '../controllers/user_controller.js'
+import { allUsers, updateUserRole } from '../controllers/user_controller.js'
 
 const router = express.Router()
 
-router.get('/', allUsers)
-
+router.get('/', allUsers);
+router.put('/:id/role', updateUserRole);
 export default router

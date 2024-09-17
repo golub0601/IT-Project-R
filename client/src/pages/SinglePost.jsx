@@ -83,14 +83,20 @@ const SinglePost = () => {
             <span><Link to="#">{post?.name} {post?.surname}</Link></span>
             <div className='post-info'>{post.date ? moment(post?.date).fromNow() : 'Once upon a time'}</div>
           </div>
-          {(currUser?.id === post?.user_id || currUser?.id==8) && (
-            <div className="edit-links">
-              <Link to={`/posts/write?edit=${postId}`} state={post}>
-                <button className='edit'>Edit Post</button>
-              </Link>
-              <button onClick={handleDelete} className='delete'>Delete Post</button>
-            </div>
-          )}
+          <div className="edit-links">
+            {(currUser?.id === post?.user_id) && (
+                <Link to={`/posts/write?edit=${postId}`} state={post}>
+                  <button className='edit'>Edit Post</button>
+                </Link>
+            )}
+            {(currUser?.role > 1000 || currUser?.id === post?.user_id) && (
+              <button onClick={handleDelete} className='delete'>
+                Delete Post
+                </button>
+            )}
+              
+                
+          </div>
         </div>
         <div className="post-text">
           <h1>{post?.title}</h1>

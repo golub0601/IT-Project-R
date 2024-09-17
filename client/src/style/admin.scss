@@ -1,137 +1,164 @@
 @import 'colors.scss';
+
 .admin-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    flex-direction: column;
-    padding: 20px;
-    h2{
-        text-align: center;
-        margin-bottom: 20px;
-    }
-  }
-  
-  .tabs {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+
+  h2 {
+    text-align: center;
     margin-bottom: 20px;
-    margin-top: 10px;
-  
-    .tab {
-      padding: 10px 20px;
-      margin-right: 10px;
-      border: 1px solid $greyTeal;
-      background-color: $deepTeal;
+    font-size: 34px;
+    text-decoration: overline;
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 10px;
+
+  .tab {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: 1px solid $greyTeal;
+    background-color: $deepTeal;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &.active {
+      background-color: darken($deepTeal, 15%);
       color: white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-  
-      &.active {
-        background-color: darken($deepTeal, 15%);
-        color: white;
+      font-weight: 700;
+      border: 2px solid #ffffff;
+      padding: 18px;
+      box-sizing: border-box;
+      animation: border-animation 0.5s forwards;
+    }
+
+    @keyframes border-animation {
+      0% {
+        border-top: $purple 2px solid;
+        border-right: $purple 2px solid;
+      }
+      100% {
+        border-top: $shadowColor 2px solid;
+        border-right: $shadowColor 2px solid;
+        border-radius: 8px;
         font-weight: 700;
-        border: 2px solid #ffffff;
-        padding: 18px;
-        // text-decoration: underline;
-        box-sizing: border-box;
-        animation: border-animation 0.5s forwards
       }
-      @keyframes border-animation {
-        0% {
-          border-top: $purple 2px solid;
-          border-right: $purple 2px solid;
-        }
-        100% {
-          border-top: $shadowColor 2px solid;
-          border-right: $shadowColor 2px solid;
-          border-radius: 8px;
-          font-weight: 700;
-        }
     }
 
-  
-      &:hover {
-        background-color: darken($deepTeal, 10%);
-      }
+    &:hover {
+      background-color: darken($deepTeal, 10%);
+    }
+  }
+}
+
+.tab-content {
+  width: 90vw;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 80px;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add a shadow for depth
+  border-radius: 8px;
+  overflow: hidden;
+
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid $greyTeal; // Border color for separation
+    select{
+      border: $deepTeal solid 1px;
     }
   }
 
-  .tab-content{
-    width: 90vw;
+  th {
+    background-color: $purple;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
-  
-  .table-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Add a shadow for depth
-    border-radius: 8px;
-    overflow: hidden;
-    
-  
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid $greyTeal; // Border color for separation
+
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: $greyTeal; // Alternate row colors
     }
-  
-    th {
-      background-color: $purple;
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+
+    &:nth-child(even) {
+      background-color: #f9f9f9; // Slightly lighter for contrast
     }
-  
-    tbody tr {
-      &:nth-child(odd) {
-        background-color: $greyTeal; // Alternate row colors
-      }
-  
-      &:nth-child(even) {
-        background-color: #f9f9f9; // Slightly lighter for contrast
-      }
-  
-      &:hover {
-        background-color: $deepTeal;
-        color: white;
-        transition: background-color 0.3s ease;
-      }
-    }
-  
-    td {
-      color: #333;
-      &:first-child {
-        font-weight: bold; // Highlight the first column (ID)
-      }
-    }
-  
-    button {
-      // margin: 0 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
+
+    &:hover {
       background-color: $deepTeal;
       color: white;
-      font-size: 0.9em;
       transition: background-color 0.3s ease;
-  
+    }
+  }
+
+  td {
+    color: #333;
+    &:first-child {
+      font-weight: bold; // Highlight the first column (ID)
+    }
+  }
+
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: $deepTeal;
+    color: white;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($deepTeal, 10%);
+    }
+
+    &.delete-btn {
+      background-color: $softCoral;
+      padding: 10px 20px;
+
       &:hover {
-        background-color: darken($deepTeal, 10%);
-      }
-  
-      &.delete-btn {
-        background-color: $softCoral;
-        padding: 10px 20px;
-        &:hover {
-          background-color: darken($softCoral, 15%);
-        }
+        background-color: darken($softCoral, 15%);
       }
     }
   }
   
+}
+
+.pagination-controls{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
+  input{
+    padding: 5px 10px;
+    font-weight: 600;
+  }
+  button{
+    padding: 10px;
+    &:disabled{
+      background: $shadowColor;
+    }
+  }
+  
+}

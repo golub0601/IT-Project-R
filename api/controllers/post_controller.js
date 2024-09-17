@@ -11,7 +11,7 @@ export const getAllPosts = async (req, res) => {
         const limit = parseInt(req.query.limit) || 6; // Number of posts per page
         const offset = (page - 1) * limit;
         let category_id;
-        let query = "SELECT * FROM posts";
+        let query = "SELECT posts.*, users.name, users.surname FROM posts JOIN users ON posts.user_id = users.id";
         let countQuery = "SELECT COUNT(*) AS total FROM posts";  // Query to count total posts
         var result = '';
         let totalCountResult;
@@ -209,6 +209,8 @@ export const deletePost = async (req, res) => {
             return res.status(401).json('Not authenticated');
         }
 
+        // if ()
+
         jwt.verify(token, "jwtkey", async (err, userInfo) => {
             if (err) return res.status(403).json("Token is not valid!");
 
@@ -217,10 +219,9 @@ export const deletePost = async (req, res) => {
                 return res.status(400).json({ error: 'Invalid post ID' });
             }
             const db = await connect();
-            const q = "DELETE FROM posts WHERE id = @post_id AND user_id = @user_id";
+            const q = "DELETE FROM posts WHERE id = @post_id";
             const result = await db.request()
                 .input('post_id', sql.Int, postId)
-                .input('user_id', sql.Int, userInfo.id)
                 .query(q);
 
             if (result.rowsAffected[0] === 0) {

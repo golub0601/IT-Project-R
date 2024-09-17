@@ -9,7 +9,7 @@ import Admin from "./pages/Admin";
 import Landing from "./pages/Landing";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import ProtectedRoute from './components/ProtectedRoute'; // Import the protected route component
+import { ProtectedRoute, ProtectedRouteAdmin }from './components/ProtectedRoute'; // Import the protected route component
 
 const Layout = () => (
   <>
@@ -57,9 +57,9 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <ProtectedRoute>
+      <ProtectedRouteAdmin>
         <Admin />
-      </ProtectedRoute>
+      </ProtectedRouteAdmin>
     ),
   },
 ]);

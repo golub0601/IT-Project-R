@@ -56,3 +56,38 @@ export const allUsers = async (req, res) => {
         return res.status(500).json({ error: 'Database error', details: err });
     }
 };
+
+export const updateUserRole = async (req, res) => {
+    try {
+      const { role } = req.body; // Get the new role from the request body
+      const userId = req.params.id; // Get the user ID from the request URL
+  
+      const db = await connect();
+      // Query to find the role ID based on role name
+      const roleQuery = "SELECT role_id FROM roles WHERE role_name = @role_name";
+      const roleResult = await db
+        .request()
+        .input('role_name', sql.VarChar, role)
+        .query(roleQuery);
+  
+      const roleId = roleResult.recordset[0]?.role_id;
+  
+      if (!roleId) {
+        return res.status(400).json({ error: 'Invalid role' });
+      }
+  
+      // Update user's role
+      const updateQuery = "UPDATE users SET role = @role_id WHERE id = @user_id";
+      await db
+        .request()
+        .input('role_id', sql.Int, roleId)
+        .input('user_id', sql.Int, userId)
+        .query(updateQuery);
+  
+      return res.json({ message: 'User role updated successfully' });
+    } catch (error) {
+      console.error('Error updating user role:', error);
+      return res.status(500).json({ error: 'Database error', details: error });
+    }
+  };
+  

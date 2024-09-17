@@ -5,6 +5,7 @@ import { connect } from './db.js'
 import postRoutes from './routes/posts.js'
 import userRoutes from './routes/users.js'
 import authRoutes from './routes/auth.js'
+import rolesRoutes from './routes/roles.js'
 import cookieParser from "cookie-parser";
 import multer from "multer";
 
@@ -56,6 +57,7 @@ app.post("/api/upload", upload.single("cover_img"), function (req, res) {
 app.use('/api/posts', postRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/roles', rolesRoutes)
 
 
 app.listen(port, () => {
