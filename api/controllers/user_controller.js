@@ -15,55 +15,38 @@ export const allUsers = async (req, res) => {
         var result = '';
         let totalCountResult;
         
-        if (category_req) {
-            const cat_q = "SELECT id FROM categories WHERE name = @Cat";
-            const category_q_result = await db.request()
-                .input('Cat', sql.VarChar, category_req)
-                .query(cat_q);
-            
-            category_id = category_q_result.recordset.length === 1 
-                ? category_q_result.recordset[0]['id']
-                : null;
-        }
-
-        if (category_id) {
-            query += " WHERE category_id = @Cat_id";
-            countQuery += " WHERE category_id = @Cat_id";  // Apply same filter to count
-            query += " ORDER BY id DESC";
-            query += " OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";  // Pagination query
+        query += " ORDER BY id DESC";
+        query += " OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
+        try {
             result = await db.request()
-                .input("Cat_id", sql.Int, category_id)
                 .input("Offset", sql.Int, offset)
                 .input("Limit", sql.Int, limit)
                 .query(query);
-            totalCountResult = await db.request().input("Cat_id", sql.Int, category_id).query(countQuery);
-        } else {
-            query += " ORDER BY id DESC";
-            query += " OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
-            try {
-                result = await db.request()
-                    .input("Offset", sql.Int, offset)
-                    .input("Limit", sql.Int, limit)
-                    .query(query);
-            } catch (error) {
-                console.log(error);  
-                return res.status(500).json({ error: 'Database error', details: error });
-            }
-            
-            totalCountResult = await db.request().query(countQuery);
+        } catch (error) {
+            console.log(error);  
+            return res.status(500).json({ error: 'Database error', details: error });
         }
+        
+        totalCountResult = await db.request().query(countQuery);
+        
 
         // Fetch total count for pagination
         const totalCount = totalCountResult.recordset[0].total;
 
         // Exclude password field from each user record
-        const users = result.recordset.map(user => {
-            const { password, ...other } = user;  // Exclude password from the user object
+        const users = await Promise.all(result.recordset.map(async user => {
+            const role_name_q = "SELECT role_name FROM roles WHERE role_id = @role_id";
+            const role_q_result = await db.request()
+                .input('role_id', sql.Int, user.role)
+                .query(role_name_q);
+                
+            user.role = role_q_result.recordset[0]?.role_name || "Unknown";
+            const { password, ...other } = user; 
             return other;  // Return user object without password
-        });
+        }));
 
         return res.json({
-            users: users,  // Send the modified users list without passwords
+            users: users,  // Send the modified users list without passwords and role changed to name of role
             total: totalCount,
             page: page,
             totalPages: Math.ceil(totalCount / limit)

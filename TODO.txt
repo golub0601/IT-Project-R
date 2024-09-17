@@ -1,5 +1,6 @@
 - disable user
 - delete post
+- add scroll to top on admin page
 - admin page and stuff
 
 - search po text u naslovima
